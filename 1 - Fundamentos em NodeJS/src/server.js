@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
     if(method === 'GET' && url === '/users') {
         return res
             .setHeader('Content-type', 'application/json')
-            .end(JSON.stringify(users))
+            .end(JSON.stringify(users));
     } 
 
     if(method === 'POST' && url === '/users') {
@@ -18,11 +18,11 @@ const server = http.createServer((req, res) => {
         });
 
         return res
-            .setHeader('Content-type', 'application/json')
-            .end("Usuarios criado com sucesso!");
+            .writeHead(201)
+            .end();
     }
 
-    return res.end("Hello Word") 
+    return res.writeHead(404).end("Erro na solicitação") 
 });
 
 server.listen(7777);
