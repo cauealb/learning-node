@@ -1,4 +1,4 @@
-import { Readable, Writable } from 'node:stream';
+import { Readable, Writable, Transform } from 'node:stream';
 
 class ReadStreams extends Readable {
     index = 0;
@@ -20,13 +20,22 @@ class ReadStreams extends Readable {
     }
 }
 
+class TransformStreams extends Transform {
+    _transform(chunk, encoding, callback) {
+        let str = chunk.toString().toUpperCase();
+
+        callback(null, Buffer.from(str));
+    }
+}
+
 class WriteStreams extends Writable {
-    _write(chunk, enconding, callback) {
-        console.log(chunk.toString().toUpperCase());
+    _write(chunk, encoding, callback) {
+        console.log(chunk.toString());
         callback();
     }
     
 }
 
 new ReadStreams()
+    .pipe(new TransformStreams())
     .pipe(new WriteStreams());
