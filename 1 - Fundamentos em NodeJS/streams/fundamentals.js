@@ -1,6 +1,6 @@
-import { Readable } from 'node:stream';
+import { Readable, Writable } from 'node:stream';
 
-class Streams extends Readable {
+class ReadStreams extends Readable {
     index = 0;
 
     _read() {
@@ -20,4 +20,13 @@ class Streams extends Readable {
     }
 }
 
-new Streams().pipe(process.stdout)
+class WriteStreams extends Writable {
+    _write(chunk, enconding, callback) {
+        console.log(chunk.toString().toUpperCase());
+        callback();
+    }
+    
+}
+
+new ReadStreams()
+    .pipe(new WriteStreams());
