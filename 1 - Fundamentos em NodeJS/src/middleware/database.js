@@ -1,5 +1,24 @@
+import fs from 'node:fs/promises';
+
+const dataBasePath = new URL('../db.json', import.meta.url)
+
 export class DataBase {
     #database = {}
+
+    constructor() {
+        fs.readFile(dataBasePath, 'utf8')
+        .then(data => {
+            this.#database = JSON.parse(data)
+        })
+        .catch(() => {
+            this.#persist()
+        })
+
+    }
+
+    #persist() {
+        fs.writeFile(dataBasePath, JSON.stringify(this.#database))
+    }
 
     select(table) {
         const result = this.#database[table];
@@ -12,5 +31,7 @@ export class DataBase {
         } else {
             this.#database[table] = [data];
         }
+
+        this.#persist();
     }
 }
