@@ -12,11 +12,17 @@ class TransformStreams extends Transform {
     }
 }
 
-const server = http.createServer((req, res) => {
-    return req
-        .pipe(new TransformStreams())
-        .pipe(res)
+const server = http.createServer(async (req, res) => {
+    const buffs = [];
 
+    for await (const chunk of req) {
+        buffs.push(chunk);
+    }
+
+    const result = Buffer.concat(buffs).toString();
+    console.log(result);
+
+    return res.end(result)
 })
 
 server.listen(8888);

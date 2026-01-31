@@ -7,7 +7,7 @@ class Streams extends Readable {
         const i = this.index++
 
         setTimeout(() => {
-            if(i == 50) {
+            if(i == 5) {
                 this.push(null);
             } else {
                 this.push(Buffer.from(String(i)));
@@ -20,4 +20,8 @@ fetch('http://localhost:8888', {
     method: 'POST',
     body: new Streams(),
     duplex: 'half'
+}).then(response => {
+    response.text().then(data => {
+        console.log(data);
+    })
 })
