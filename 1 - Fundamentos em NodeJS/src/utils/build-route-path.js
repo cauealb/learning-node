@@ -1,5 +1,7 @@
 export function BuildRoutePath(path) {
     const regex = /:([a-zA-Z]+)/g;
+    const newPathRegex = path.replaceAll(regex, '(?<$1>[a-z0-9\-_]+)')
 
-    console.log(Array.from(path.matchAll(regex)))
+    const pathRegex = new RegExp(`^${newPathRegex}`);
+    return pathRegex;
 }
