@@ -1,12 +1,29 @@
 import fastify from "fastify";
+import { randomUUID } from 'node:crypto'
 import { db } from "./database.js";
 
 const app = fastify();
 
-app.get('/hello', async () => {
-  const result = await db('sqlite_schema').select('*');
+app.get('/transactions', async () => {
+  const transactions = await db('transactions').select('*');
 
-  return result
+  return transactions;
+})
+
+app.post('/transactions', async () => {
+  const transaction = await db('transactions').insert({
+    id: randomUUID(),
+    title: 'PIX',
+    amount: 3000,
+  }).returning('*')
+
+  return transaction;
+})
+
+app.delete('/transactions', async () => {
+  await db('transactions').where('id', 1).del()
+
+  return 'Deletado com sucesso!'
 })
 
 app.listen({
