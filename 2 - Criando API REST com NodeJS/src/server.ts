@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import { randomUUID } from 'node:crypto'
 import { db } from "./database.js";
+import { env } from "./env/index.js";
 
 const app = fastify();
 
@@ -27,7 +28,7 @@ app.delete('/transactions', async () => {
 })
 
 app.listen({
-  port: 3333
+  port: env.PORT
 
 }).then(() => {
   console.log('Servidor restartado com sucesso!')
