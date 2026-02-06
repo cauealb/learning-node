@@ -7,7 +7,7 @@ declare module 'knex/types/tables.js' {
             title: string
             amount: number
             created_at: string
-            'session-id'?: string
+            session_id?: string
         }
     }
 }
