@@ -2,23 +2,36 @@ import type { FastifyInstance } from "fastify";
 import { db } from "../database.js";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
+import { CheckSessionIdExist } from "../middlewares/CheckSessionIdExist.js";
 
 export async function TransactionRoutes(app: FastifyInstance) {
-    app.get('/', async () => {
-      const transactions = await db('transactions').select();
+    app.get('/', {
+        preHandler: [CheckSessionIdExist]
+    }, async (request) => {
+        const { sessionId } = request.cookies 
+
+      const transactions = await db('transactions').where('session_id', sessionId).select();
       return { transactions };
     });
 
-    app.get('/:id', async (request) => {
+    app.get('/:id', {
+        preHandler: [CheckSessionIdExist]
+    }, async (request) => {
+        const { sessionId } = request.cookies
+
         const requestSchema = z.object({ id: z.string().uuid() })
         const { id } = requestSchema.parse(request.params);
 
-        const transactions = await db('transactions').where('id', id).first()
+        const transactions = await db('transactions').where({ session_id: sessionId!, id: id }).first()
         return { transactions }
     })
 
-    app.get('/summary', async () => {
-        const summay = await db('transactions').sum('amount', { as: 'amount' }).first();
+    app.get('/summary', {
+        preHandler: [CheckSessionIdExist]
+    }, async (request) => {
+        const { sessionId } = request.cookies
+
+        const summay = await db('transactions').where('session_id', sessionId).sum('amount', { as: 'amount' }).first();
         return { summay }
     })
 
