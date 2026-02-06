@@ -5,9 +5,20 @@ import { z } from "zod";
 
 export async function TransactionRoutes(app: FastifyInstance) {
     app.get('/', async () => {
-      const transactions = await db('transactions').select('*');
-      return transactions;
+      const transactions = await db('transactions').select();
+      return { transactions };
     });
+
+    app.get('/:id', async (request) => {
+        const requestSchema = z.object({ id: z.string().uuid() })
+        console.log(request.params)
+        const { id } = requestSchema.parse(request.params);
+
+        const transactions = await db('transactions').where('id', id).first()
+        return { transactions }
+    })
+
+    
 
     app.post('/', async (request, replay) => {
         const requestSchema = z.object({
