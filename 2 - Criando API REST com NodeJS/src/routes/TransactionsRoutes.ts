@@ -18,7 +18,10 @@ export async function TransactionRoutes(app: FastifyInstance) {
         return { transactions }
     })
 
-    
+    app.get('/summary', async () => {
+        const summay = await db('transactions').sum('amount', { as: 'amount' }).first();
+        return { summay }
+    })
 
     app.post('/', async (request, replay) => {
         const requestSchema = z.object({
