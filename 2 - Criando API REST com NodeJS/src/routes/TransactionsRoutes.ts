@@ -21,7 +21,7 @@ export async function TransactionRoutes(app: FastifyInstance) {
         await db('transactions').insert({
             id: randomUUID(),
             title,
-            amount: type === 'credit' ? amount : amount * -1
+            amount: type === 'credit' ? amount : amount * -1,
         })
 
         return replay.status(201).send()
