@@ -14,8 +14,11 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.2.0",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.2.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
@@ -23,7 +26,6 @@
     "fastify": "^5.7.4",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",
-    "vitest": "^4.0.18",
     "zod": "^4.3.6"
   }
 }
