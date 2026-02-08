@@ -31,8 +31,8 @@ export async function TransactionRoutes(app: FastifyInstance) {
     }, async (request) => {
         const { sessionId } = request.cookies
 
-        const summay = await db('transactions').where('session_id', sessionId).sum('amount', { as: 'amount' }).first();
-        return { summay }
+        const summary = await db('transactions').where('session_id', sessionId).sum('amount', { as: 'amount' }).first();
+        return { summary }
     })
 
     app.post('/', async (request, replay) => {
