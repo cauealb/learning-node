@@ -18,7 +18,6 @@ describe('Transaction routes', () => {
         execSync('npm run knex -- migrate:latest') 
     })
 
-    // Criar nova transação
     it('Must be able to create a new transaction', async () => {
         await request(app.server)
             .post('/transaction')
@@ -30,7 +29,6 @@ describe('Transaction routes', () => {
             .expect(201)
     }) 
 
-    // Listar todas as transações
     it('Must be able to list all transactions', async () => {
         const responsePost = await request(app.server)
             .post('/transaction')
@@ -56,7 +54,6 @@ describe('Transaction routes', () => {
         ])
     })
 
-    // Listar apenas uma transação
     it('Must be able to list only one transaction', async () => {
         const responsePost = await request(app.server)
             .post('/transaction')
@@ -86,7 +83,6 @@ describe('Transaction routes', () => {
         )
     })
 
-    // Listar suma de todas as transações
     it('Must be able to list the summary', async () => {
         const responsePost = await request(app.server)
             .post('/transaction').send({
@@ -115,7 +111,6 @@ describe('Transaction routes', () => {
         })
     })
 
-    // Deletar transações
     it('Must be able to delete one transaction', async () => {
         const responsePost = await request(app.server)
             .post('/transaction')
