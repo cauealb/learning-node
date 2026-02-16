@@ -11,7 +11,7 @@ export async function TransactionRoutes(app: FastifyInstance) {
         const { sessionId } = request.cookies 
 
       const transactions = await db('transactions').where('session_id', sessionId).select();
-      return { transactions };
+      return { transactions };             
     });
 
     app.get('/:id', {

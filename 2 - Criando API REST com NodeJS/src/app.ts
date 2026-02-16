@@ -6,5 +6,5 @@ export const app = fastify();
 
 app.register(cookie);
 app.register(TransactionRoutes, {
-  prefix: 'transaction'
+  prefix: 'transaction'                   
 })

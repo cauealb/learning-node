@@ -5,7 +5,7 @@ export async function CheckSessionIdExist(request: FastifyRequest, replay: Fasti
 
     if (!sessionId) {
         replay.status(401).send({
-            err: 'Unauthorized'
+            err: 'Unauthorized'                          
         })
     }
 }
