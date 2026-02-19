@@ -8,3 +8,13 @@ node_modules
 # Production
 build
 /generated/prisma
+
+/prisma/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/prisma/generate/prisma
+
+/prisma/generated/prisma
