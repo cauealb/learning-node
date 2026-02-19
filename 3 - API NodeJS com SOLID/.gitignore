@@ -18,3 +18,5 @@ build
 /prisma/generate/prisma
 
 /prisma/generated/prisma
+
+/prisma/generated/prisma
