@@ -23,11 +23,11 @@ model User {
 
 model Gym {
   id          String @id @default(uuid())
-  title       String
-  description String?
-  phone       String?
-  latitude    Decimal
-  longitude   Decimal
+  title       String 
+  description String? 
+  phone       String? 
+  latitude    Decimal 
+  longitude   Decimal 
 }
 
 model CheckIn {
