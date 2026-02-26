@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma.js";
 import { PrismaUserRepository } from "@/repositories/prisma-user-repository.js";
 import type { UserRepository } from "@/repositories/prisma/user-repository.js";
 import { hash } from "bcryptjs";
-import { EmailAlreadyExistsError } from "./errors/email-already-exists-error.js";
+import { EmailAlreadyExistsError } from "./errors/Email-already-exists-error.js";
 
 const prismaUserRepository = new PrismaUserRepository();
 

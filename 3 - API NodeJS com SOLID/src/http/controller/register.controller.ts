@@ -1,5 +1,5 @@
 import { PrismaUserRepository } from "@/repositories/prisma-user-repository.js";
-import { EmailAlreadyExistsError } from "@/use-case/errors/email-already-exists-error.js";
+import { EmailAlreadyExistsError } from "@/use-case/errors/Email-already-exists-error.js";
 import { RegisterUseCase } from "@/use-case/register.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
