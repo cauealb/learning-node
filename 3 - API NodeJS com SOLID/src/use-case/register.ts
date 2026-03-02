@@ -24,6 +24,6 @@ export class RegisterUseCase {
       throw new EmailAlreadyExistsError();
     }
 
-    this.userRepository.create({ name, email, password_hash });
+    await this.userRepository.create({ name, email, password_hash });
   }
 }
