@@ -45,3 +45,5 @@ model CheckIn {
   gym Gym   @relation(fields: [gym_id], references: [id])
   gym_id        String
 }
+
+
