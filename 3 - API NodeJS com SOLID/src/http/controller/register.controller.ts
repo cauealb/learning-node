@@ -29,3 +29,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
 
   return reply.status(201).send();
 }
+
+
+
+
