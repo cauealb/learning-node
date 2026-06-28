@@ -5,7 +5,7 @@ import { InMemoryRepository } from '@/repositories/in-memory-repository.js'
 import { EmailAlreadyExistsError } from './errors/email-already-exists-error.js'
 
 describe("Test Unit", () => {
-    it("shoul be able create one user", async () => {
+    it("should be able create one user", async () => {
         const UserRepository = new InMemoryRepository()
         const UseCaseRegister = new RegisterUseCase(UserRepository);
 
@@ -22,13 +22,15 @@ describe("Test Unit", () => {
         const UserRepository = new InMemoryRepository()
         const UseCaseRegister = new RegisterUseCase(UserRepository)
 
+        const password = '12345'
+
         const user = await UseCaseRegister.execute({
             name: 'John Doe',
             email: 'johndoe@gmail.com',
-            password: '1234'
+            password
         })
 
-        const isHashPasswordSuccess = await compare('1234', user.password_hash)
+        const isHashPasswordSuccess = await compare(password, user.password_hash)
 
         expect(isHashPasswordSuccess).toBe(true);
     })
