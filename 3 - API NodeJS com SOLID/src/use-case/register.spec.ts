@@ -1,24 +1,25 @@
 import { describe, expect, it } from 'vitest'
 import { RegisterUseCase } from './register.js'
 import { compare } from 'bcryptjs'
+import { InMemoryRepository } from '@/repositories/in-memory-repository.js'
 
 describe("Test Unit", () => {
-    it("should to validate the hash password", async () => {
-        const UseCaseRegister = new RegisterUseCase({
-            async create(data)  {
-                return {
-                    id: 'user-1',
-                    name: data.name,
-                    email: data.email,
-                    password_hash: data.password_hash,
-                    created_at: new Date()
-                }
-            },
-            
-            async findByEmail(email) {
-                return null
-            }
+    it("shoul be able create one user", async () => {
+        const UserRepository = new InMemoryRepository()
+        const UseCaseRegister = new RegisterUseCase(UserRepository);
+
+        const user = await UseCaseRegister.execute({
+            name: 'John Doe',
+            email: 'johndoe@gmail.com',
+            password: '1234'
         })
+
+        expect(user.id).toEqual(expect.any(String))
+    })
+
+    it("should to validate the hash password", async () => {
+        const UserRepository = new InMemoryRepository()
+        const UseCaseRegister = new RegisterUseCase(UserRepository)
 
         const user = await UseCaseRegister.execute({
             name: 'John Doe',
