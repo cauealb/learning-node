@@ -13,6 +13,7 @@ export async function TransactionRoutes(app: FastifyInstance) {
       const transactions = await db('transactions').where('session_id', sessionId).select();
       return { transactions };             
     });
+    
 
     app.get('/:id', {
         preHandler: [CheckSessionIdExist]
