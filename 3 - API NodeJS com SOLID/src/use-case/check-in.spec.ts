@@ -20,4 +20,22 @@ describe("Check-In Test", () => {
 
         expect(checkIn.id).toEqual(expect.any(String))
     })
+
+    // - [x] Red
+    // - [x] Green
+    // - [] Refactor
+
+    it("should not be able to create check-in with same day", async () => {
+        await sut.execute({
+            userId: 'user-01',
+            gymId: 'gym-01',
+        })
+
+        expect(async () =>  {
+            await sut.execute({
+                userId: 'user-01',
+                gymId: 'gym-01',
+            })
+        }).rejects.toBeInstanceOf(Error)
+    })
 })
