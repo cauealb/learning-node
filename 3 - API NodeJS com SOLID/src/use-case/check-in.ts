@@ -1,6 +1,5 @@
 import type { CheckInRepository } from "@/repositories/prisma/check-in-repository.js";
 import type { CheckIn } from "prisma/generated/prisma/browser.js";
-import { check } from "zod";
 
 interface CheckInRequest {
     userId: string
