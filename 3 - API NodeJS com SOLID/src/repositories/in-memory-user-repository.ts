@@ -2,7 +2,7 @@ import type { User } from "prisma/generated/prisma/browser.js";
 import type { UserCreateInput } from "prisma/generated/prisma/models.js";
 import type { UserRepository } from "./prisma/user-repository.js";
 
-export class InMemoryCheckInRepository implements UserRepository {
+export class InMemoryUserRepository implements UserRepository {
     private items: User[] = []
 
     async create(data: UserCreateInput) {

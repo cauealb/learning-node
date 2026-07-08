@@ -1,16 +1,15 @@
-import { InMemoryCheckInRepository } from "@/repositories/in-memory-check-in-repository.js";
+import { InMemoryUserRepository } from "@/repositories/in-memory-user-repository.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import { GetUserProfileUseCase } from "./get-user-profile.js";
-import type { UserRepository } from "@/repositories/prisma/user-repository.js";
 import { hash } from "bcryptjs";
 import { ResourceNotFound } from "./errors/resource-not-found.js";
 
-let userRepository: UserRepository;
+let userRepository: InMemoryUserRepository;
 let sut: GetUserProfileUseCase;
 
 describe("Get User Profile Test", () => {
   beforeEach(() => {
-    userRepository = new InMemoryCheckInRepository();
+    userRepository = new InMemoryUserRepository();
     sut = new GetUserProfileUseCase(userRepository);
   });
 

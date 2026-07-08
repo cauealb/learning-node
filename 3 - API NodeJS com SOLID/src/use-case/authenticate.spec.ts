@@ -1,15 +1,15 @@
-import { InMemoryCheckInRepository } from "@/repositories/in-memory-check-in-repository.js";
+import { InMemoryUserRepository } from "@/repositories/in-memory-user-repository.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import { AuthenticaUseCase } from "./authenticate.js";
 import { InvalidCredentialError } from "./errors/invalid-credential-error.js";
 import { hash } from "bcryptjs";
 
-let userRepository: InMemoryCheckInRepository;
+let userRepository: InMemoryUserRepository;
 let sut: AuthenticaUseCase;
 
 describe("Authenticate test", () => {
   beforeEach(() => {
-    userRepository = new InMemoryCheckInRepository();
+    userRepository = new InMemoryUserRepository();
     sut = new AuthenticaUseCase(userRepository);
   });
 
