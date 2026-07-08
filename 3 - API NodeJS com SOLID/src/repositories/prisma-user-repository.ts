@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma.js";
 import type { UserRepository } from "./prisma/user-repository.js";
 import type { UserCreateInput } from "prisma/generated/prisma/models.js";
-import type { User } from "prisma/generated/prisma/browser.js";
 
 export class PrismaUserRepository implements UserRepository {
     async create(data: UserCreateInput) {
@@ -20,5 +19,9 @@ export class PrismaUserRepository implements UserRepository {
         })
 
         return user;
+    }
+
+    async findById(userId: string) {
+        return await prisma.user.findFirst({ where: { id: userId } })
     }
 }
