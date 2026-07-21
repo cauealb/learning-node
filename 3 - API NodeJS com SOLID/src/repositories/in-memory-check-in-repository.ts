@@ -1,6 +1,7 @@
 import type { CheckIn } from "prisma/generated/prisma/browser.js";
 import type { CheckInUncheckedCreateInput } from "prisma/generated/prisma/models.js";
 import type { CheckInRepository } from "./prisma/check-in-repository.js";
+import dayjs from "dayjs";
 
 export class InMemoryCheckInRepository implements CheckInRepository {
     private items: CheckIn[] = [] 
@@ -19,7 +20,15 @@ export class InMemoryCheckInRepository implements CheckInRepository {
     }
 
     async findByUserIdOnDate(userId: string, date: Date) {
-        const checkIn = this.items.find(item => item.user_id === userId);
+        const startOfTheDay = dayjs(date).startOf('date')
+        const endOfTheDay = dayjs(date).endOf('date')
+
+        const checkIn = this.items.find((item) => {
+            const checkInDate = dayjs(item.created_at)
+            const isOnSameDate = checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay)
+
+            return item.user_id === userId && isOnSameDate;
+        });
 
         if(!checkIn) {
             return null
