@@ -2,18 +2,19 @@ import type { Gym } from "prisma/generated/prisma/client.js";
 import type { gymsRepository } from "./prisma/gyms-repository.js";
 import type { GymCreateInput } from "prisma/generated/prisma/models.js";
 import { Decimal } from "@prisma/client/runtime/client";
+import { randomUUID } from "node:crypto";
 
 export class InMemoryGymsRepository implements gymsRepository {
     private item: Gym[] = []
 
     async create(gym: GymCreateInput) {
         const data: Gym = {
-            id: 'gym-01',
-            title: 'gym.title',
-            description: 'TypeScript Gym',
-            phone: '',
-            latitude: new Decimal(-23.5064001),
-            longitude: new Decimal(-46.759936),
+            id: gym.id ?? randomUUID(),
+            title: gym.title,
+            description: gym.description ?? null,
+            phone: gym.phone ?? null,
+            latitude: new Decimal(gym.latitude.toString()),
+            longitude: new Decimal(gym.longitude.toString()),
         }
 
         this.item.push(data)
