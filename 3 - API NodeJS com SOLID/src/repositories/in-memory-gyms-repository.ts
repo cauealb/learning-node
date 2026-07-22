@@ -12,8 +12,8 @@ export class InMemoryGymsRepository implements gymsRepository {
             title: 'gym.title',
             description: 'TypeScript Gym',
             phone: '',
-            latitude: new Decimal(0),
-            longitude: new Decimal(0),
+            latitude: new Decimal(-23.5064001),
+            longitude: new Decimal(-46.759936),
         }
 
         this.item.push(data)

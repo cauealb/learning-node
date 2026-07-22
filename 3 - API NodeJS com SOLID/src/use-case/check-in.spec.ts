@@ -17,8 +17,8 @@ describe("Check-In Test", () => {
 
         gymRepository.create({
             title: '',
-            latitude: 0,
-            longitude: 0,
+            latitude: -23.5064001,
+            longitude: -46.759936,
         })
 
     })
@@ -27,31 +27,38 @@ describe("Check-In Test", () => {
         const { checkIn } = await sut.execute({
             userId: 'user-01',
             gymId: 'gym-01',
-            userLatitude: 0,
-            userLongitude: 0
+            userLatitude: -23.5064001,
+            userLongitude: -46.759936
         })
 
         expect(checkIn.id).toEqual(expect.any(String))
     })
 
-    // - [x] Red
-    // - [x] Green
-    // - [] Refactor
-
     it("should not be able to create check-in with same day", async () => {
         await sut.execute({
             userId: 'user-01',
             gymId: 'gym-01',
-            userLatitude: 0,
-            userLongitude: 0
+            userLatitude: -23.5064001,
+            userLongitude: -46.759936
         })
 
         expect(async () =>  {
             await sut.execute({
                 userId: 'user-01',
                 gymId: 'gym-01',
-                userLatitude: 0,
-                userLongitude: 0
+                userLatitude: -23.5064001,
+                userLongitude: -46.759936
+            })
+        }).rejects.toBeInstanceOf(Error)
+    })
+
+    it("should be able validate distance between two points", async () => {
+        expect(async () => {
+            await sut.execute({
+                userId: 'user-01',
+                gymId: 'gym-01',
+                userLatitude: -23.5479414,
+                userLongitude: -46.5321067
             })
         }).rejects.toBeInstanceOf(Error)
     })
