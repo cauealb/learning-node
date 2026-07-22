@@ -37,4 +37,25 @@ describe("Search Gyms Use Case test", () => {
             })
         ])
     })
+
+    it("should be able validation pagination search gyms", async () => {
+        for(let i = 1; i <= 22; i++) {
+            await repository.create({
+                title: `JavaScript Gym 0${i}`,
+                latitude: -23.5064001,
+                longitude: -46.759936
+            })
+        }
+
+        const { gyms } = await sut.execute({
+            query: 'JavaScript',
+            page: 2
+        });
+
+        expect(gyms).toHaveLength(2)
+        expect(gyms).toEqual([
+            expect.objectContaining({ title: 'JavaScript Gym 021' }),
+            expect.objectContaining({ title: 'JavaScript Gym 022' })
+        ])
+    })
 })
