@@ -49,8 +49,6 @@ describe("Fetch User CheckIns History test", () => {
             page: 2
         })
 
-        console.log(checkins.checkIns)
-
         expect(checkins.checkIns).toHaveLength(2)
         expect(checkins.checkIns).toEqual([
             expect.objectContaining({ gym_id: 'gym-021' }),

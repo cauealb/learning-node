@@ -25,7 +25,7 @@ describe("Get User Profile Test", () => {
   });
 
   it("should be able not find user", async () => {
-    expect(async () => {
+    await expect(async () => {
       await sut.execute({ userId: "non-find-id" });
     }).rejects.toBeInstanceOf(ResourceNotFound);
   });

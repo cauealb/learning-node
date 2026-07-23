@@ -3,7 +3,7 @@ export interface Coordinates {
     longitude: number
 }
 
-export async function GetDistanceBetweenCoordinates(
+export function GetDistanceBetweenCoordinates(
     from: Coordinates,
     to: Coordinates
 ) {

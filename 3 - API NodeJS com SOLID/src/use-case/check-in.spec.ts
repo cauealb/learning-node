@@ -43,7 +43,7 @@ describe("Check-In Test", () => {
             userLongitude: -46.759936
         })
 
-        expect(async () =>  {
+        await expect(async () =>  {
             await sut.execute({
                 userId: 'user-01',
                 gymId: 'gym-01',
@@ -54,7 +54,7 @@ describe("Check-In Test", () => {
     })
 
     it("should be able validate distance between two points", async () => {
-        expect(async () => {
+        await expect(async () => {
             await sut.execute({
                 userId: 'user-01',
                 gymId: 'gym-01',
