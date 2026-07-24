@@ -27,7 +27,7 @@ export class CheckInUseCase {
             throw new ResourceNotFound()
         }
 
-        const distance = await GetDistanceBetweenCoordinates(
+        const distance = GetDistanceBetweenCoordinates(
             { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() },
             { latitude: userLatitude, longitude: userLongitude }
         )
