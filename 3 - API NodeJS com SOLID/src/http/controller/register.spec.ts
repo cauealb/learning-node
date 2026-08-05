@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import request from 'supertest'
+import { randomUUID } from 'node:crypto'
 import { app } from "@/app.js";
 
 describe("Register (e2e)", () => {
@@ -12,11 +13,13 @@ describe("Register (e2e)", () => {
     })
 
     it("should be able create a user", async () => {
+        const email = `johndoe-${randomUUID()}@example.com`
+
         const response = await request(app.server)
             .post('/users')
             .send({
                 name: "John Doe",
-                email: "johndoe12@gmail.com",
+                email,
                 password: "1234211212",
             })
 

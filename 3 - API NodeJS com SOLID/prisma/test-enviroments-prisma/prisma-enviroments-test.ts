@@ -1,5 +1,6 @@
 import 'dotenv/config.js'
-import { prisma } from '@/lib/prisma.js'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { PrismaClient } from '../generated/prisma/client.js'
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 
@@ -26,16 +27,27 @@ export default <Environment>{
 
         process.env.DATABASE_URL = dataBaseUrl
 
-        execSync('npx prisma db push')
+        execSync('npx prisma db push', {
+            env: process.env,
+            stdio: 'inherit',
+        })
+
+        const prisma = new PrismaClient({
+            adapter: new PrismaPg({ connectionString: dataBaseUrl }),
+        })
 
         return {
             async teardown() {
                 await prisma.$executeRawUnsafe(`
-                    DROP SCHEMA IF EXISTS ${shemaUUID} CASCADE    
+                    DROP SCHEMA IF EXISTS ${quoteIdentifier(shemaUUID)} CASCADE
                 `)
 
                 await prisma.$disconnect()
             }
         }
     }
+}
+
+function quoteIdentifier(identifier: string) {
+    return `"${identifier.replaceAll('"', '""')}"`
 }
