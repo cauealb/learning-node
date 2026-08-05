@@ -7,5 +7,5 @@ export function MakeCheckInUseCase() {
     const gymsRepository = new PrismGymsRepository()
     const checkInUseCase = new CheckInUseCase(checkInRepository, gymsRepository)
 
-    return checkInRepository
+    return checkInUseCase
 }
