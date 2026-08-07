@@ -33,7 +33,10 @@ export default <Environment>{
         })
 
         const prisma = new PrismaClient({
-            adapter: new PrismaPg({ connectionString: dataBaseUrl }),
+            adapter: new PrismaPg(
+                { connectionString: dataBaseUrl },
+                { schema: shemaUUID },
+            ),
         })
 
         return {
