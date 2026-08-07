@@ -6,8 +6,6 @@ import { InMemoryGymsRepository } from "@/repositories/in-memory-gyms-repository
 let repository: gymsRepository
 let sut: CreateGymUseCase
 
-let ty: makeRegiter
-
 describe("Create gym test", () => {
     beforeEach(() => {
         repository = new InMemoryGymsRepository()
