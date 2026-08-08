@@ -7,7 +7,7 @@ export async function history(request: FastifyRequest, reply: FastifyReply) {
         page: z.coerce.number().min(1).default(1)
     })
 
-    const { page } = schemaHistoryBody.parse(request.body)
+    const { page } = schemaHistoryBody.parse(request.query)
     const historyUseCase = MakeFetchUserCheckInHistoryUseCase()
 
     const { checkIns } = await historyUseCase.execute({
